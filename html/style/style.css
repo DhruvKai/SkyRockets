@@ -1,0 +1,58 @@
+h1{
+    border-bottom: dotted;
+    border-width: 4px;
+    background-color: bisque;
+    font-family: 'Viaoda Libre', cursive;
+    background: linear-gradient(red,blue,green,yellow,violet);
+}
+
+p{
+    border-style: solid;
+    padding: 5px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    /* font-stretch: ultra-expanded; */
+    font-weight: 100;
+    font-size: 18px;
+    color: #430B28;
+    border: 5px, solid;
+    padding: 25px;
+    margin-left: auto ;
+}
+html{
+    /* background-image: "media\12.jpg.jpg"; */
+   /*  background:linear-gradient(#803058,#D8026E);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed; */
+    background-image: url("A:\Web development\html\media\754560.png");
+
+}
+
+a:link{
+    color:#FE0281 ;
+}
+a:visited{
+    color:#FF5525;
+}
+
+button:hover{
+    background-color: #FF5525;
+    color: wheat;
+}
+
+button:active{
+    background-color:#FF5525 ;
+}
+/* li:first-child{
+    color: #FE0281;
+}
+li:last-child{
+    color: bisque;
+} */
+li:nth-child(odd){
+    background-color: #FF5525;
+}
+li:nth-child(even){
+    background-color: #b42903;
+}

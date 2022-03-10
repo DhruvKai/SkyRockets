@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 /* function logger() {
     console.log(`my name is jonas`);
@@ -45,7 +45,6 @@ const retireCal = (birthYear, firstName) => {
 }
 
 console.log(retireCal(1999, "Dhruv")); */
-
 
 // function call inside function
 /*
@@ -156,3 +155,16 @@ for (let exercise = 1; exercise < 4; exercise++) {
 }
  */
 
+const measureKelvin = function () {
+  const measurement = {
+    type: "temp",
+    unit: "celsius",
+    value: prompt("Degrees C"),
+  };
+  //    console.table(measurement);
+  console.log(measurement.value);
+  const kelvin = measurement.value + 273;
+  return kelvin;
+};
+
+console.log(measureKelvin());

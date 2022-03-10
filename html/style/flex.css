@@ -1,0 +1,21 @@
+.container div{
+    color: white;
+    background-color: gray;
+    margin: 5px;
+    height: 100px;
+    width: 100px;
+    text-align: center;
+    font-size: 50px;
+
+}
+
+.container{
+    display: flex;
+    flex-wrap: nowrap;
+    background-color: #4444;
+    /* flex-direction: column;
+    width: 110px; */
+/* 
+    justify-content: flex-start;
+    justify-content: center; */
+}

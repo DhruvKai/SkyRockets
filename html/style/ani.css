@@ -1,0 +1,31 @@
+p{
+    background-color: brown;
+    margin: 0px;
+    font-size: 85px;
+    text-align: center;
+    width: 100px;
+
+    animation: mycoloranimation;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+
+    animation: myrotanimation;
+    animation-duration: 6s;
+    animation-iteration-count: infinite;
+
+}
+
+@keyframes mycoloranimation{
+    0%{background-color: red;}
+    20%{background-color:blue;}
+    40%{background-color:violet;}
+    60%{background-color:purple;}
+    80%{background-color:aliceblue;}
+    100%{background-color: bisque;}
+}
+
+@keyframes myrotanimation {
+    0%{transform: rotateX(360deg);}
+    50%{transform: rotateY(360deg);}
+    100%{transform: rotateZ(360deg);}
+}

@@ -167,9 +167,62 @@ Test data for bonus:
 § Data 2: [1, 5, 3, 9, 6, 1]
 Hints: Use many of the tools you learned about in this and the last section 😉
 GOOD LUCK 😀 */
-const poll = {
-  question: 'What is your favourite programming language?',
-  options: ['0: JavaScript', '1: Python', '2: Rust', '3:C++'],
-  // This generates [0, 0, 0, 0]. More in the next section!
-  answers: new Array(4).fill(0),
+// const poll = {
+//   question: 'What is your favourite programming language?',
+//   options: ['0: JavaScript', '1: Python', '2: Rust', '3:C++'],
+//   // This generates [0, 0, 0, 0]. More in the next section!
+//   answers: new Array(4).fill(0),
+//   registerAnswer() {
+//     const answer = Number(
+//       prompt(
+//         `${this.question}\n ${this.options.join('\n')}\n(Write option no.)`
+//       )
+//     );
+//     // console.log(answer);
+//     //short curcuiting
+//     typeof answer === 'number' &&
+//       answer < this.answers.length &&
+//       this.answers[answer]++;
+//     // console.log(this.answers);
+//     this.displayResults();
+//     this.displayResults(`string`);
+//   },
+//   displayResults(type = 'array') {
+//     if (type === 'array') {
+//       console.log(this.answers);
+//     } else if (type === 'string') {
+//       console.log(`poll results are ${this.answers.join(',')}`);
+//     }
+//   },
+// };
+
+// // poll.registerAnswer();
+// document
+//   .querySelector('.poll')
+//   .addEventListener('click', poll.registerAnswer.bind(poll));
+
+///immedaltly evoked function expression
+/* const runOnce = function () {
+  console.log(`this will never run again`);
 };
+runOnce(); //we can still call it again
+//paranthesis around the fucntion
+(function () {
+  console.log(`this will never run again`);
+})(); //called there again
+
+(() => {
+  console.log(`this is arrow function that will not run agian`);
+  const isPrivate = 10;
+})();
+
+// console.log(isPrivate); //unreachable
+//this is used to add private varables
+//but in es6 we can do it like this
+
+{
+  let priVar = 10;
+}
+
+// console.log(priVar);
+//IIFE this has some usecase  */

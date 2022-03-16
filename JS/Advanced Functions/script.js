@@ -254,3 +254,58 @@ GOOD LUCK 😀 */
 //A closre is like a bagpack that a fucntion carries around. This bag has all the variable that were presnt in the envionment where the funciton was created. when it finds the variable is not avaibale it takes it out from the bag(though in reality the closure is given priority and is checked first)
 
 //more examples of closure
+
+// let f;
+
+// const g = function () {
+//   const a = 23;
+//   f = function () {
+//     console.log(a * 2);
+//   };
+// };
+// const h = function () {
+//   const b = 777;
+//   f = function () {
+//     console.log(b * 2);
+//   };
+// };
+
+// g(); //already finished execution
+// f(); // a is inside bag of f
+
+// //reassigning f function
+
+// h();
+// f();
+
+// //example 2
+// const boardPassengers = function (n, wait) {
+//   const perGroup = n / 3;
+//   setTimeout(function () {
+//     console.log(`we are now  boarding all ${n} passengers`);
+//     console.log(`There are 3 groups, each with ${perGroup} passengers`);
+//   }, wait * 1000);
+
+//   console.log(`Will start boarding in ${wait} seconds`);
+// };
+
+// boardPassengers(180, 3);
+
+/* 
+Coding Challenge #2
+This is more of a thinking challenge than a coding challenge 🤓
+Your tasks:
+1. Take the IIFE below and at the end of the function, attach an event listener that
+changes the color of the selected h1 element ('header') to blue, each time
+the body element is clicked. Do not select the h1 element again!
+2. And now explain to yourself (or someone around you) why this worked! Take all
+the time you need. Think about when exactly the callback function is executed,
+and what that means for the variables involved in this example. */
+
+// (function () {
+//   const header = document.querySelector('h1');
+//   header.style.color = 'red';
+//   document.querySelector('body').addEventListener('click', function () {
+//     header.style.color = 'blue';
+//   });
+// })();

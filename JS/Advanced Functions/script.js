@@ -202,27 +202,55 @@ GOOD LUCK 😀 */
 //   .addEventListener('click', poll.registerAnswer.bind(poll));
 
 ///immedaltly evoked function expression
-/* const runOnce = function () {
-  console.log(`this will never run again`);
-};
-runOnce(); //we can still call it again
-//paranthesis around the fucntion
-(function () {
-  console.log(`this will never run again`);
-})(); //called there again
+// const runOnce = function () {
+//   console.log(`this will never run again`);
+// };
+// runOnce(); //we can still call it again
+// //paranthesis around the fucntion
+// (function () {
+//   console.log(`this will never run again`);
+// })(); //called there again
 
-(() => {
-  console.log(`this is arrow function that will not run agian`);
-  const isPrivate = 10;
-})();
+// (() => {
+//   console.log(`this is arrow function that will not run agian`);
+//   const isPrivate = 10;
+// })();
 
-// console.log(isPrivate); //unreachable
-//this is used to add private varables
-//but in es6 we can do it like this
+// // console.log(isPrivate); //unreachable
+// //this is used to add private varables
+// //but in es6 we can do it like this
 
-{
-  let priVar = 10;
-}
+// {
+//   let priVar = 10;
+// }
 
-// console.log(priVar);
-//IIFE this has some usecase  */
+// // console.log(priVar);
+// //IIFE this has some usecase
+
+//closures. JS does it manually
+
+// const secureBooking = function () {
+//   let passengerCount = 0;
+
+//   return function () {
+//     passengerCount++;
+//     console.log(`${passengerCount} passengers`);
+//   };
+// };
+
+// const booker = secureBooking();
+// booker();
+// booker();
+// booker();
+// booker();
+// console.dir(booker); //look at internally properties (but we can't access them)
+//secureBooking funciton has already executed and has vanished from the stack but we can still use the inner fucntion.
+// it is because of clousres
+// A function has access to the variable enorinment (VE) of execution context in which it was created, even after the execution context it gone. so Closure is - VE attached to the function, exactly as it was at the time and place the function was created.
+
+//more defination of closure(informal)
+//A closure gives a fucntion access to all the variable of its parent fucntion, even after that parent function has retuned(vanished from the stack). The fucntion keeps a refernce to its outer scope, which preserves the sope chain thoughout the time.
+//(more infomal) A closure makes sure a fucntion doesn't loose connection to varable that existed at function's birth place;
+//A closre is like a bagpack that a fucntion carries around. This bag has all the variable that were presnt in the envionment where the funciton was created. when it finds the variable is not avaibale it takes it out from the bag(though in reality the closure is given priority and is checked first)
+
+//more examples of closure

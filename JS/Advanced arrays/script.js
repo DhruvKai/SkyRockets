@@ -75,13 +75,31 @@ const displayMovements = function (movements) {
     containerMovements.insertAdjacentHTML('afterbegin', html);
   });
 };
-displayMovements(account1.movements);
 //calculating balances
 const calBalance = function (movements) {
   const balance = movements.reduce((acc, val) => acc + val, 0);
-  labelBalance.textContent = `${balance}EUR`;
+  labelBalance.textContent = `${balance}€`;
 };
-calBalance(account1.movements);
+//cal depsposits outs and intrests
+const calcDisplaySummary = function (movements) {
+  const incomes = movements
+    .filter(mov => mov > 0)
+    .reduce((acc, mov) => acc + mov, 0);
+  labelSumIn.textContent = `${incomes}€`;
+
+  const out = movements
+    .filter(mov => mov < 0)
+    .reduce((acc, mov) => acc + mov, 0);
+  labelSumOut.textContent = `${Math.abs(out)}`;
+
+  const interest = movements
+    .filter(mov => mov > 0)
+    .map(deposit => (deposit * 1.2) / 100)
+    .filter(int => int >= 1)
+    .reduce((acc, int) => acc + int, 0);
+  labelSumInterest.textContent = `${interest}€`;
+};
+
 //creating usernames
 const createUserName = function (accs) {
   accs.forEach(function (acc) {
@@ -93,7 +111,34 @@ const createUserName = function (accs) {
   });
 };
 createUserName(accounts);
-// console.log(accounts);
+
+//event handler
+let currentAccount;
+
+btnLogin.addEventListener('click', function (e) {
+  //prevent form from submitng
+  e.preventDefault();
+
+  currentAccount = accounts.find(
+    acc => acc.username === inputLoginUsername.value
+  );
+  console.log(currentAccount);
+  if (currentAccount?.pin === Number(inputLoginPin.value)) {
+    //Display UI and welcome message
+    labelWelcome.textContent = `Welcome back, ${
+      currentAccount.owner.split(' ')[0]
+    }`;
+    containerApp.style.opacity = 100;
+    //Diplay movements
+    displayMovements(currentAccount.movements);
+
+    //DIplay balance
+    calBalance(currentAccount.movements);
+
+    //Display summary
+    calcDisplaySummary(currentAccount.movements);
+  }
+});
 
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
@@ -307,14 +352,42 @@ createUserName(accounts);
 // § Data 1: [5, 2, 4, 1, 15, 8, 3]
 // § Data 2: [16, 6, 10, 5, 6, 1, 4]
 // GOOD LUCK
-const age = [5, 2, 4, 1, 15, 8, 3];
-const calcAverageHumanAge = function () {
-  const calAge = age
-    .map(val => (val <= 2 ? 2 * val : 16 + val * 4))
-    .filter(val => val >= 18);
-  const avgAge = calAge.reduce((acc, val, i) => acc + val, 0) / age.length;
+// const age = [5, 2, 4, 1, 15, 8, 3];
+// const calcAverageHumanAge = function () {
+//   const calAge = age
+//     .map(val => (val <= 2 ? 2 * val : 16 + val * 4))
+//     .filter(val => val >= 18);
+//   const avgAge = calAge.reduce((acc, val, i) => acc + val, 0) / age.length;
 
-  console.log(calAge);
-  console.log(avgAge);
-};
-calcAverageHumanAge();
+//   console.log(calAge);
+//   console.log(avgAge);
+// };
+// calcAverageHumanAge();
+
+// Coding Challenge #3
+// Rewrite the 'calcAverageHumanAge' function from Challenge #2, but this time
+// as an arrow function, and using chaining!
+// Test data:
+// § Data 1: [5, 2, 4, 1, 15, 8, 3]
+// § Data 2: [16, 6, 10, 5, 6, 1, 4]
+// GOOD LUCK 😀
+// const age = [5, 2, 4, 1, 15, 8, 3];
+// const calcAverageHumanAge = val => {
+//   const calcAge = age
+//     .map(val => (val <= 2 ? 2 * val : 16 + val * 4))
+//     .filter(val => val >= 18)
+//     .reduce((acc, val, _, arr) => acc + val / arr.length, 0);
+//   console.log(calcAge);
+// };
+// calcAverageHumanAge();
+
+//find method - ony returns one element
+// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+// const firstWithdrawal = movements.find(mov => mov < 0);
+// console.log(firstWithdrawal);
+
+// //we can find also in objects
+// console.log(accounts);
+// const account = accounts.find(acc => acc.owner === 'Jessica Davis');
+// console.log(account);

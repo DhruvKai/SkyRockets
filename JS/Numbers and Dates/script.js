@@ -94,7 +94,7 @@ const displayMovements = function (movements, sort = false) {
         <div class="movements__type movements__type--${type}">${
       i + 1
     } ${type}</div>
-        <div class="movements__value">${mov}€</div>
+        <div class="movements__value">${mov.toFixed(2)}€</div>
       </div>
     `;
 
@@ -155,6 +155,35 @@ const updateUI = function (acc) {
 // Event handlers
 let currentAccount;
 
+const startLogOutTimer = function () {
+  //set timer 5 min
+  let time = 100;
+
+  //call the timer every sec
+  setInterval(function () {
+    const min = String(Math.trunc(time / 60)).padStart(2, 0);
+    const sec = time % 60;
+    //in each call display it to UI
+    labelTimer.textContent = `${min}:${sec}`;
+
+    //decrease 1 sec
+    time--;
+    //when the timmer is at 0 stop the timmer and log it out
+    if (time == 0) {
+      clearInterval(timer);
+      containerApp.style.opacity = 0;
+    }
+  }, 1000);
+};
+
+//FAKE LOGIN
+currentAccount = account1;
+updateUI(currentAccount);
+containerApp.style.opacity = 100;
+
+// const now = new Date();
+// const day = now.getDate();
+
 btnLogin.addEventListener('click', function (e) {
   // Prevent form from submitting
   e.preventDefault();
@@ -174,7 +203,7 @@ btnLogin.addEventListener('click', function (e) {
     // Clear input fields
     inputLoginUsername.value = inputLoginPin.value = '';
     inputLoginPin.blur();
-
+    startLogOutTimer();
     // Update UI
     updateUI(currentAccount);
   }
@@ -206,7 +235,7 @@ btnTransfer.addEventListener('click', function (e) {
 btnLoan.addEventListener('click', function (e) {
   e.preventDefault();
 
-  const amount = Number(inputLoanAmount.value);
+  const amount = Number.floor(inputLoanAmount.value);
 
   if (amount > 0 && currentAccount.movements.some(mov => mov >= amount * 0.1)) {
     // Add movement
@@ -251,3 +280,45 @@ btnSort.addEventListener('click', function (e) {
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
+
+//conversion
+// const x = '23';
+// const y = 7;
+// console.log(x + y);
+// console.log(Number(x) + 7);
+// console.log(+x + 7);
+
+// //Parsing
+// console.log(Number.parseInt('30px')); //getting rid of things other than number
+// console.log(Number.parseInt('e23')); //though this does not work
+// console.log(Number.parseFloat('2.5rem'));
+// console.log(Number.parseInt('2.5rem')); //only 2
+
+// console.log(Number.isNaN(+'x'));
+// console.log(Number.isNaN(y)); //is number
+// console.log(Number.isFinite(23 / 0));
+// console.log(Number.isFinite(23));
+
+// console.log((2.3456).toFixed(2)); //round to 2 decimal points
+
+// const now = new Date();
+// console.log(now);
+
+// console.log(new Date(2034, 10, 19, 20, 30));
+
+//date cal
+// const future = new Date(2022, 10, 19, 15, 23);
+// console.log(+future);
+
+// const calcDaysPassed = (date1, date2) =>
+//   Math.abs((date2 - date1) / (1000 * 60 * 60 * 24));
+
+// const days1 = calcDaysPassed(new Date(2037, 3, 4), new Date(2037, 3, 14));
+// console.log(days1);
+
+// setTimeout(() => console.log(`here is you pizza`), 3000);
+
+// setInterval(() => {
+//   const now = new Date();
+//   console.log(now);
+// }, 1000);

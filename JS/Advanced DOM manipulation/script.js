@@ -29,3 +29,43 @@ document.addEventListener('keydown', function (e) {
     closeModal();
   }
 });
+
+///////////////////////////////////////////////////////////
+//Selecting elements
+// console.log(document.documentElement);
+// console.log(document.head);
+// console.log(document.body);
+
+// const header = document.querySelector('.header');
+// const allSelector = document.querySelectorAll('.section');
+// console.log(allSelector);
+
+// document.getElementById('section--1');
+// const allButtons = document.getElementsByTagName('button');
+// console.log(allButtons);
+
+// console.log(document.getElementsByClassName('btn'));
+
+// //creating and inserting elements
+// // .insertAdjacentHTML
+
+// const message = document.createElement('div');
+// message.classList.add('cookie-message');
+// message.innerHTML =
+//   'We use cookies for improved functionality and analytics. <button class="btn btn--close-cookies"> Got it! </button>';
+
+// header.prepend(message);
+// // header.append(message);
+
+// //Delete elements
+// document
+//   .querySelector('.btn--close-cookie')
+//   .addEventListener('click', function () {
+//     message.remove();
+//   });
+
+// // Styles
+// message.style.backgroundColor = '#37383d';
+// message.style.width = '120%';
+
+// console.log(message.style.height);

@@ -132,13 +132,13 @@ const renderCountry = function (data) {
 
 //now refactoring the code
 
-// const getJSON = function (url, errorMsg = 'Something went wrong') {
-//   return fetch(url).then(response => {
-//     if (!response.ok) throw new Error(`${errorMsg} (${response.status})`);
+const getJSON = function (url, errorMsg = 'Something went wrong') {
+  return fetch(url).then(response => {
+    if (!response.ok) throw new Error(`${errorMsg} (${response.status})`);
 
-//     return response.json();
-//   });
-// };
+    return response.json();
+  });
+};
 
 // const getCountryData = function (country) {
 //   getJSON(`https://restcountries.com/v2/name/${country}`, 'country not found')
@@ -200,9 +200,137 @@ const renderCountry = function (data) {
 // we have been using.
 // 7. Render the country and catch any errors, just like we have done in the last
 // lecture (you can even copy this code, no need to type the same code)
-// The Complete JavaScript Course 31
+//
 // Test data:
 // § Coordinates 1: 52.508, 13.381 (Latitude, Longitude)
 // § Coordinates 2: 19.037, 72.873
 // § Coordinates 3: -33.933, 18.474
 // GOOD LUCK
+// const whereAmI = function (lat, lng) {
+//   fetch(`https://geocode.xyz/${lat},${lng}?geoit=json`)
+//     .then(res => {
+//       if (!res.ok) throw new Error(`Problem with geocoding ${res.status}`);
+//       return res.json();
+//     })
+//     .then(data => {
+//       console.log(data);
+//       console.log(`You are in ${data.city}, ${data.country}`);
+
+//       return fetch(`https://restcountries.eu/rest/v2/name/${data.country}`);
+//     })
+//     .then(res => {
+//       if (!res.ok) throw new Error(`Country not found (${res.status})`);
+
+//       return res.json();
+//     })
+//     .then(data => renderCountry(data[0]))
+//     .catch(err => console.error(`${err.message} 💥`));
+// };
+// whereAmI(52.508, 13.381);
+// whereAmI(19.037, 72.873);
+// whereAmI(-33.933, 18.474);
+
+//we learned about consuming promise but now we will create promises
+//resolve means promise fullfilled. Reject means it was not fullfilled
+// const lotteryPromise = new Promise(function (resolve, reject) {
+//   setTimeout(function () {
+//     if (Math.random() >= 0.5) {
+//       resolve('You Win🤑 ');
+//     } else {
+//       reject(new Error('You lost you money💩 '));
+//     }
+//   }, 2000);
+// });
+// //lottery promise is a promise object. we consume with then
+// lotteryPromise.then(res => console.log(res)).catch(err => console.log(err));
+
+// //promisyfying setTimeout
+// const wait = function (seconds) {
+//   return new Promise(function (resolve) {
+//     setTimeout(resolve, seconds * 1000);
+//   });
+// };
+
+// wait(2)
+//   .then(() => {
+//     console.log('I waited for 2 sec');
+//     return wait(1);
+//   })
+//   .then(() => console.log(`I waited for 1 sec`));
+///////////////////////////////////////////////////////////
+
+//new way to consume promises in ES7
+// Consuming Promises with Async/Await
+// Error Handling With try...catch
+
+const getPosition = function () {
+  return new Promise(function (resolve, reject) {
+    navigator.geolocation.getCurrentPosition(resolve, reject);
+  });
+};
+
+// fetch(`https://restcountries.eu/rest/v2/name/${country}`).then(res =>
+//   console.log(res)
+// );
+
+// const whereAmI = async function () {
+//   try {
+//     // Geolocation
+//     const pos = await getPosition();
+//     const { latitude: lat, longitude: lng } = pos.coords;
+
+//     // Reverse geocoding
+//     const resGeo = await fetch(`https://geocode.xyz/${lat},${lng}?geoit=json`);
+//     if (!resGeo.ok) throw new Error('Problem getting location data');
+
+//     const dataGeo = await resGeo.json();
+//     console.log(dataGeo);
+
+//     // Country data
+//     const res = await fetch(
+//       `https://restcountries.eu/rest/v2/name/${dataGeo.country}`
+//     );
+
+//     // BUG in video:
+//     if (!resGeo.ok) throw new Error('Problem getting country');
+
+//     FIX: if (!res.ok) throw new Error('Problem getting country');
+
+//     const data = await res.json();
+//     console.log(data);
+//     renderCountry(data[0]);
+//   } catch (err) {
+//     console.error(`${err} 💥`);
+//     renderError(`💥 ${err.message}`);
+//   }
+// };
+// whereAmI();
+// whereAmI();
+// whereAmI();
+// console.log('FIRST');
+
+// try {
+//   let y = 1;
+//   const x = 2;
+//   y = 3;
+// } catch (err) {
+//   alert(err.message);
+// }
+
+//promises in parallel
+
+// const get3Countries = async function (c1, c2, c3) {
+//   try {
+//     const data = await Promise.all([
+//       getJSON(`https://restcountries.eu/v2/name/${c1}`),
+//       getJSON(`https://restcountries.com/v2/name/${c2}`),
+//       getJSON(`https://restcountries.eu/v2/name/${c3}`),
+//     ]);
+
+//     console.log(data.map(d => d[0].capital));
+//   } catch (err) {
+//     console.log(err);
+//   }
+// };
+
+// get3Countries('portugal', 'canada', 'tanzania');

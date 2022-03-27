@@ -17,6 +17,7 @@
   "homepage": "https://github.com/DhruvKai/SkyRockets#readme",
   "description": "",
   "dependencies": {
+    "@types/node": "^17.0.23",
     "leaflet": "^1.7.1",
     "lodash": "^4.17.21",
     "lodash-es": "^4.17.21"

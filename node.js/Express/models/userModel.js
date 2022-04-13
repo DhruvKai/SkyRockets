@@ -44,6 +44,11 @@ const userSchema = new mongoose.Schema({
   passwordChangedAt: Date,
   passwordResetToken: String,
   passwordresetExpires: Date,
+  active: {
+    type: Boolean,
+    default: true,
+    select: false,
+  },
 });
 //hashing the password
 userSchema.pre('save', async function (next) {
@@ -53,6 +58,12 @@ userSchema.pre('save', async function (next) {
   this.password = bcyrpt.hash(this.password, 12);
   //delete this field
   this.passwordConfirm = undefined;
+  next();
+});
+
+userSchema.pre('save', function (next) {
+  if (!this.isModified('password') || this.isNew) return next();
+  this.passwordChangedAt = Date.now() - 1000;
   next();
 });
 
@@ -75,6 +86,12 @@ userSchema.methods.changedPasswordAfter = function (JWTTimestamp) {
   //false means not changed
   return false;
 };
+
+userSchema.pre(/^find/, function (next) {
+  //this points to current query
+  this.find({ active: { $ne: false } });
+  next();
+});
 
 userSchema.methods.createPasswordResetToken = function () {
   const resetToken = crypto.randomBytes(32).toString('hex');

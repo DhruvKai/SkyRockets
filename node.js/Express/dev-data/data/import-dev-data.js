@@ -1,3 +1,4 @@
+/* eslint-disable import/no-useless-path-segments */
 const fs = require('fs');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');

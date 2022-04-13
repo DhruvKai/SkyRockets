@@ -1,8 +1,8 @@
 /* eslint-disable import/no-useless-path-segments */
 // eslint-disable-next-line import/no-useless-path-segments
-const catchAsync = require('./../utils/catchAsync');
 const Tour = require('./../models/toursModel');
 const APIFeatures = require('./../utils/apiFeatures');
+const catchAsync = require('./../utils/catchAsync');
 const AppError = require('./../utils/appError');
 
 exports.aliasTopTours = (req, res, next) => {
@@ -12,13 +12,7 @@ exports.aliasTopTours = (req, res, next) => {
   next();
 };
 
-//importing as json
-// const tours = JSON.parse(
-//   fs.readFileSync(`${__dirname}/../dev-data/data/tours-simple.json`)
-// );
-
 exports.getAllTours = catchAsync(async (req, res, next) => {
-  //execute query //To reafactor we made a feature object of APIFeatures class and chained all the methods to it
   const features = new APIFeatures(Tour.find(), req.query)
     .filter()
     .sort()
@@ -26,9 +20,9 @@ exports.getAllTours = catchAsync(async (req, res, next) => {
     .paginate();
   const tours = await features.query;
 
+  // SEND RESPONSE
   res.status(200).json({
     status: 'success',
-
     results: tours.length,
     data: {
       tours,
@@ -41,8 +35,9 @@ exports.getTour = catchAsync(async (req, res, next) => {
   //Tour.findOne({__id: req.params.id}) the abose code is shorthand for this
 
   if (!tour) {
-    return next(new AppError('No tour found with this id', 404));
+    return next(new AppError('No tour found with that ID', 404));
   }
+
   res.status(200).json({
     status: 'success',
     data: {

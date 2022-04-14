@@ -2,7 +2,7 @@
 const express = require('express');
 const tourController = require('./../controllers/tourController');
 const authController = require('./../controllers/authController');
-//route handlers
+//route handlers.
 
 const router = express.Router();
 

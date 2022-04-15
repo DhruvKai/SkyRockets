@@ -1,7 +1,9 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable prefer-arrow-callback */
 const mongoose = require('mongoose');
 const slugify = require('slugify');
 const validator = require('validator');
+// const User = require('./userModel');
 
 const tourSchema = new mongoose.Schema(
   {
@@ -12,7 +14,7 @@ const tourSchema = new mongoose.Schema(
       trim: true,
       maxlength: [40, 'A tour name cannot have more than 40 characters'],
       minlength: [10, 'A tour name must have atleast 10 characters'],
-      validate: [validator.isAlpha, 'Tour name must only have characters'],
+      // validate: [validator.isAlpha, 'Tour name must only have characters'],
     },
     slug: String,
 
@@ -86,6 +88,38 @@ const tourSchema = new mongoose.Schema(
     },
   },
   {
+    startLocation: {
+      //GeoJSON
+      type: {
+        type: String,
+        default: 'Point',
+        enum: ['Point'],
+      },
+      coordinates: [Number],
+      address: String,
+      description: String,
+    },
+    locations: [
+      {
+        type: {
+          type: String,
+          default: 'Point',
+          enum: ['Point'],
+        },
+        coordinates: [Number],
+        address: String,
+        descritpion: String,
+        data: Number,
+      },
+    ],
+    guides: [
+      {
+        type: mongoose.Schema.ObjectId,
+        ref: 'User',
+      },
+    ],
+  },
+  {
     toJSON: { virtuals: true },
     toObject: { virtuals: true },
   }
@@ -107,6 +141,12 @@ tourSchema.pre('save', function (next) {
   next();
 });
 
+// tourSchema.pre('save', async function (next) {
+//   const guidesPromises = this.guides.map(async id => await User.findById(id));
+//   this.guides = await Promise.all(guidesPromises);
+//   next();
+// });
+
 // tourSchema.post('save', function (doc, next) {
 //   console.log(doc);
 //   next();
@@ -125,6 +165,13 @@ tourSchema.post(/^find/, function (docs, next) {
   // console.log(docs);
   next();
 });
+
+// tourSchema.pre(/^find/, function (next) {
+//   this.populate({
+//     path: 'guides',
+//     select: '-__v -passwordChangedAt',
+//   });
+// });
 
 //AGGREAGTION MIDDLEWARE
 tourSchema.pre('aggreagate', function (next) {

@@ -2,7 +2,7 @@
 /* eslint-disable prefer-arrow-callback */
 const mongoose = require('mongoose');
 const slugify = require('slugify');
-const validator = require('validator');
+// const validator = require('validator');
 // const User = require('./userModel');
 
 const tourSchema = new mongoose.Schema(
@@ -89,7 +89,7 @@ const tourSchema = new mongoose.Schema(
   },
   {
     startLocation: {
-      //GeoJSON
+      // GeoJSON
       type: {
         type: String,
         default: 'Point',
@@ -108,8 +108,8 @@ const tourSchema = new mongoose.Schema(
         },
         coordinates: [Number],
         address: String,
-        descritpion: String,
-        data: Number,
+        description: String,
+        day: Number,
       },
     ],
     guides: [
@@ -166,12 +166,12 @@ tourSchema.post(/^find/, function (docs, next) {
   next();
 });
 
-// tourSchema.pre(/^find/, function (next) {
-//   this.populate({
-//     path: 'guides',
-//     select: '-__v -passwordChangedAt',
-//   });
-// });
+tourSchema.pre(/^find/, function (next) {
+  this.populate({
+    path: 'guides',
+    select: '-__v -passwordChangedAt',
+  });
+});
 
 //AGGREAGTION MIDDLEWARE
 tourSchema.pre('aggreagate', function (next) {

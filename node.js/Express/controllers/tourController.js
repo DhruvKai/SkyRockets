@@ -2,8 +2,8 @@
 // eslint-disable-next-line import/no-useless-path-segments
 const Tour = require('./../models/toursModel');
 const catchAsync = require('./../utils/catchAsync');
-const AppError = require('./../utils/appError');
 const factory = require('./handlerFactory');
+const AppError = require('./../utils/appError');
 
 exports.aliasTopTours = (req, res, next) => {
   req.query.limit = '5';

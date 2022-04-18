@@ -10,6 +10,7 @@ router.post('/login', authController.login);
 router.post('/forgotPassword', authController.forgotPassword);
 router.patch('/resetPassword/:token', authController.resetPassword);
 
+//PROTECT ALL ROUTES AFTER THIS MIDDLEWARE
 router.use(authController.protect);
 
 router.get('/me', userController.getMe, userController.getUser);
@@ -18,6 +19,7 @@ router.patch('/updateMyPassword', authController.updatePassword);
 router.patch('/updateMe', userController.updateMe);
 router.delete('/deleteMe', userController.deleteMe);
 
+// router.use(authController.restrictTo('admin'));
 router
   .route('/')
   .get(userController.getAllUsers)

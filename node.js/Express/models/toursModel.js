@@ -124,6 +124,11 @@ const tourSchema = new mongoose.Schema(
     toObject: { virtuals: true },
   }
 );
+//setting index to increase the performance
+tourSchema.index({ price: 1, ratingsAverage: -1 });
+tourSchema.index({ slug: 1 });
+// tourSchema.index({ price: 1 });
+
 //vrtual properties are not part of database but will give data on the fly
 tourSchema.virtual('durationWeeks').get(function () {
   return this.duration / 7;

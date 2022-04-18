@@ -181,11 +181,11 @@ tourSchema.pre(/^find/, function (next) {
   next();
 });
 //AGGREAGTION MIDDLEWARE
-tourSchema.pre('aggreagate', function (next) {
-  this.pipeline().unshift({ $match: { secretTour: { $ne: true } } });
+// tourSchema.pre('aggreagate', function (next) {
+//   this.pipeline().unshift({ $match: { secretTour: { $ne: true } } });
 
-  next();
-});
+//   next();
+// });
 
 const Tour = mongoose.model('Tour', tourSchema);
 

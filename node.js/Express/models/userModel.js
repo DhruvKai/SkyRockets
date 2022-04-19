@@ -50,6 +50,8 @@ const userSchema = new mongoose.Schema({
     select: false,
   },
 });
+//comment this part to import new data
+
 //hashing the password
 userSchema.pre('save', async function (next) {
   //only run when password is modified

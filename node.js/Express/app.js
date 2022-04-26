@@ -34,7 +34,7 @@ if (process.env.NODE_ENV === 'development') {
 const limiter = rateLimit({
   max: 100,
   windowMs: 60 * 60 * 1000,
-  message: 'Too many request from this IP, please try in an hour!',
+  message: 'Too many request from this IP, please try in an hour!'
 });
 app.use('/api', limiter);
 //body parser, reading  data from body to req.body
@@ -55,15 +55,15 @@ app.use(
       'ratingAverage',
       'maxGroupSize',
       'diffficuty',
-      'price',
-    ],
+      'price'
+    ]
   })
 );
 
 // test middleware
 app.use((req, res, next) => {
   req.requestTime = new Date().toISOString();
-  console.log(req.cookies);
+  // console.log(req.cookies);
   next();
 });
 

@@ -1,4 +1,3 @@
-/* eslint-disable import/no-useless-path-segments */
 const express = require('express');
 const reviewController = require('./../controllers/reviewController');
 const authController = require('./../controllers/authController');
@@ -9,9 +8,9 @@ router.use(authController.protect);
 
 router
   .route('/')
-  .get(reviewController.getAllreviews)
+  .get(reviewController.getAllReviews)
   .post(
-    authController.restrictTo('user', 'admin'),
+    authController.restrictTo('user'),
     reviewController.setTourUserIds,
     reviewController.createReview
   );

@@ -1,4 +1,5 @@
 /* eslint-disable */
+
 export const displayMap = locations => {
   mapboxgl.accessToken =
     'pk.eyJ1IjoiZGhydXZrYWl0aCIsImEiOiJjbDI3Y20ybncxMHY1M2NxaWgxYnlpZ3ZrIn0.S6njYLMlRSWAdn5InjqAiA';
@@ -9,7 +10,7 @@ export const displayMap = locations => {
     scrollZoom: false
     // center: [-118.113491, 34.111745],
     // zoom: 10,
-    // interactive: false
+    // interactive: false,
   });
 
   const bounds = new mapboxgl.LngLatBounds();
@@ -35,7 +36,7 @@ export const displayMap = locations => {
       .setHTML(`<p>Day ${loc.day}: ${loc.description}</p>`)
       .addTo(map);
 
-    // Extend map bounds to include current location
+    // Extend map bound to include current location
     bounds.extend(loc.coordinates);
   });
 

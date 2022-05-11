@@ -1,14 +1,14 @@
 const express = require('express');
-const bookingController = require('./../controllers/bookingController');
-const authController = require('./../controllers/authController');
+const bookingController = require('../controllers/bookingController');
+const authController = require('../controllers/authController');
 
 const router = express.Router();
 
-router.use(authController.protect);
+router.use(authController.protect); // All the routes(middlewares) after this middleware are protected
 
 router.get('/checkout-session/:tourId', bookingController.getCheckoutSession);
 
-router.use(authController.restrictTo('admin', 'lead-guide'));
+router.use(authController.restrictTO('admin', 'lead-guide')); // Only admin can access the routes below this middleware
 
 router
   .route('/')
